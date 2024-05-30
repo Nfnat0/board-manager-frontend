@@ -1,15 +1,17 @@
 // src/redux/reducers/boardReducer.js
-import { ADD_BOARD, EDIT_BOARD, DELETE_BOARD } from '../actions/boardActions';
+import { ADD_BOARD, EDIT_BOARD, DELETE_BOARD, SET_BOARDS } from '../actions/boardActions';
 
 const initialState = {
-  boards: [
-    { id: 1, title: 'Project A', description: 'Description A', icon: '📋' },
-    { id: 2, title: 'Project B', description: 'Description B', icon: '📊' },
-  ],
+  boards: [],
 };
 
 const boardReducer = (state = initialState, action) => {
   switch (action.type) {
+    case SET_BOARDS:
+      return {
+        ...state,
+        boards: action.payload,
+      };
     case ADD_BOARD:
       return {
         ...state,

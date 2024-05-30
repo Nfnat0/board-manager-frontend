@@ -1,18 +1,22 @@
 // src/pages/Home.js
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Container, Grid, Fab } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
 import BoardCard from '../components/BoardCard';
 import BoardEditModal from '../components/BoardEditModal';
 import BoardAddModal from '../components/BoardAddModal';
-import { deleteBoard } from '../redux/actions/boardActions';
+import { fetchBoards, deleteBoard } from '../redux/actions/boardActions';
 
 const Home = () => {
   const boards = useSelector((state) => state.boards.boards);
   const dispatch = useDispatch();
   const [selectedBoard, setSelectedBoard] = React.useState(null);
   const [isAddModalOpen, setIsAddModalOpen] = React.useState(false);
+
+  useEffect(() => {
+    dispatch(fetchBoards());
+  }, [dispatch]);
 
   const handleEditClick = (board) => {
     setSelectedBoard(board);

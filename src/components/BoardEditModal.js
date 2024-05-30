@@ -11,8 +11,10 @@ const BoardEditModal = ({ board, onClose }) => {
   const [icon, setIcon] = React.useState(board.icon);
 
   const handleSave = () => {
-    dispatch(editBoard({ ...board, title, description, icon }));
-    onClose();
+    const updatedBoard = { ...board, title, description, icon };
+    dispatch(editBoard(updatedBoard)).then(() => {
+      onClose();
+    });
   };
 
   return (
