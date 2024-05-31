@@ -1,7 +1,7 @@
 // src/pages/Home.js
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Container, Grid, Fab } from '@material-ui/core';
+import { Container, Grid, Button } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
 import BoardCard from '../components/BoardCard';
 import BoardEditModal from '../components/BoardEditModal';
@@ -48,9 +48,15 @@ const Home = () => {
           </Grid>
         ))}
       </Grid>
-      <Fab color="primary" onClick={handleOpenAddModal} className="addButton">
-        <AddIcon />
-      </Fab>
+      <Button
+        variant="contained"
+        color="primary"
+        startIcon={<AddIcon />}
+        className="addButton"
+        onClick={handleOpenAddModal}
+      >
+        Add Board
+      </Button>
       {selectedBoard && <BoardEditModal board={selectedBoard} onClose={handleCloseEditModal} />}
       {isAddModalOpen && <BoardAddModal onClose={handleCloseAddModal} />}
     </Container>
