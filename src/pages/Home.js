@@ -40,24 +40,29 @@ const Home = () => {
   };
 
   return (
-    <Container>
-      <Grid container spacing={3}>
-        {boards.map((board) => (
-          <Grid item xs={12} sm={6} md={4} key={board.id}>
-            <BoardCard board={board} onEditClick={() => handleEditClick(board)} onDelete={() => handleDelete(board.id)} />
-          </Grid>
-        ))}
-      </Grid>
+    <Container className="home-container">
       <Button
         variant="contained"
         color="primary"
         startIcon={<AddIcon />}
-        className="addButton"
         onClick={handleOpenAddModal}
       >
-        Add Board
+      Add
       </Button>
-      {selectedBoard && <BoardEditModal board={selectedBoard} onClose={handleCloseEditModal} />}
+      <Grid container spacing={3}>
+        {boards.map((board) => (
+          <Grid item xs={12} sm={6} md={4} key={board.id}>
+            <BoardCard
+              board={board}
+              onEditClick={() => handleEditClick(board)}
+              onDelete={() => handleDelete(board.id)}
+            />
+          </Grid>
+        ))}
+      </Grid>
+      {selectedBoard && (
+        <BoardEditModal board={selectedBoard} onClose={handleCloseEditModal} />
+      )}
       {isAddModalOpen && <BoardAddModal onClose={handleCloseAddModal} />}
     </Container>
   );

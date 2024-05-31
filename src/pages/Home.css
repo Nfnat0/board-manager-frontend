@@ -1,8 +1,4 @@
 /* src/pages/Home.css */
-.addButton {
-    position: fixed;
-    left: 16px;
-    top: 16px;
-    z-index: 1000;
-    padding: 8px 16px; /* Add padding to the button for better appearance */
-  }
+.home-container Button {
+  margin-bottom: 20px;
+}
