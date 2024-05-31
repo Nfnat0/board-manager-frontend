@@ -1,21 +1,23 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import store from './redux/store';
 import Home from './pages/Home';
-// import Board from './pages/Board';
+import Header from './components/Header';
+import Footer from './components/Footer';
+import './App.css';
 
-const App = () => {
+function App() {
   return (
     <Provider store={store}>
-      <Router>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          {/* <Route path="/board/:boardId" element={<Board />} /> */}
-        </Routes>
-      </Router>
+      <div className="App">
+        <Header />
+        <div className="content">
+          <Home />
+        </div>
+        <Footer />
+      </div>
     </Provider>
   );
-};
+}
 
 export default App;

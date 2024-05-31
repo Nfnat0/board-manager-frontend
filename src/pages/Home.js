@@ -7,6 +7,7 @@ import BoardCard from '../components/BoardCard';
 import BoardEditModal from '../components/BoardEditModal';
 import BoardAddModal from '../components/BoardAddModal';
 import { fetchBoards, deleteBoard } from '../redux/actions/boardActions';
+import './Home.css'; // Import the CSS file for custom styles
 
 const Home = () => {
   const boards = useSelector((state) => state.boards.boards);
@@ -47,7 +48,7 @@ const Home = () => {
           </Grid>
         ))}
       </Grid>
-      <Fab color="primary" onClick={handleOpenAddModal}>
+      <Fab color="primary" onClick={handleOpenAddModal} className="addButton">
         <AddIcon />
       </Fab>
       {selectedBoard && <BoardEditModal board={selectedBoard} onClose={handleCloseEditModal} />}

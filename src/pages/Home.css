@@ -1,0 +1,9 @@
+/* src/pages/Home.css */
+.addButton {
+    position: fixed;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1000;
+  }
+  
