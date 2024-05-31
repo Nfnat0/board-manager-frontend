@@ -3,7 +3,7 @@
   margin-bottom: 20px;
 }
 
-.addListContainer, .addTaskContainer {
+.addListContainer {
   display: flex;
   align-items: center;
   margin-bottom: 20px;
