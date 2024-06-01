@@ -9,7 +9,7 @@ import {
   Button,
   IconButton,
 } from "@material-ui/core";
-import { AddCircle } from "@material-ui/icons";
+import AddIcon from "@material-ui/icons/Add";
 import ListCard from "../components/ListCard";
 import TaskModal from "../components/TaskModal";
 import {
@@ -34,6 +34,8 @@ const BoardScreen = () => {
 
   const [newListName, setNewListName] = useState("");
   const [selectedCard, setSelectedCard] = useState(null);
+  const [isTaskModalOpen, setIsTaskModalOpen] = useState(false);
+  const [selectedListId, setSelectedListId] = useState(null);
 
   useEffect(() => {
     dispatch(fetchLists(boardId));
@@ -49,24 +51,24 @@ const BoardScreen = () => {
 
   const handleEditTask = (task) => {
     setSelectedCard(task);
+    setIsTaskModalOpen(true);
+  };
+
+  const handleAddTask = (listId) => {
+    setSelectedCard(null);
+    setSelectedListId(listId);
+    setIsTaskModalOpen(true);
   };
 
   const handleSaveTask = (task) => {
-    dispatch(editCard(task));
-  };
-
-  const handleAddTask = (listId, taskName) => {
-    if (taskName.trim()) {
+    if (selectedCard) {
+      dispatch(editCard(task));
+    } else {
       dispatch(
-        addCard({
-          listId,
-          boardId: Number(boardId),
-          name: taskName,
-          details: "",
-          expirationDate: "",
-        })
+        addCard({ ...task, listId: selectedListId, boardId: Number(boardId) })
       );
     }
+    setIsTaskModalOpen(false);
   };
 
   return (
@@ -87,7 +89,7 @@ const BoardScreen = () => {
           margin="normal"
         />
         <IconButton color="primary" onClick={handleAddList}>
-          <AddCircle />
+          <AddIcon />
         </IconButton>
       </div>
       <Grid container spacing={3}>
@@ -104,10 +106,11 @@ const BoardScreen = () => {
           </Grid>
         ))}
       </Grid>
-      {selectedCard && (
+      {isTaskModalOpen && (
         <TaskModal
           task={selectedCard}
-          onClose={() => setSelectedCard(null)}
+          open={isTaskModalOpen}
+          onClose={() => setIsTaskModalOpen(false)}
           onSave={handleSaveTask}
         />
       )}

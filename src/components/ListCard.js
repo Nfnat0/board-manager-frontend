@@ -7,7 +7,6 @@ import './ListCard.css';
 
 const ListCard = ({ list, cards, onEditListName, onDeleteList, onAddTask, onEditTask }) => {
   const [editingListName, setEditingListName] = useState(list.name);
-  const [newTaskName, setNewTaskName] = useState('');
 
   const handleSaveListName = () => {
     onEditListName({ ...list, name: editingListName });
@@ -27,14 +26,7 @@ const ListCard = ({ list, cards, onEditListName, onDeleteList, onAddTask, onEdit
           <DeleteIcon />
         </IconButton>
         <div className="addTaskContainer">
-          <TextField
-            label="New Task"
-            value={newTaskName}
-            onChange={(e) => setNewTaskName(e.target.value)}
-            margin="normal"
-            fullWidth
-          />
-          <IconButton color="primary" onClick={() => { onAddTask(list.id, newTaskName); setNewTaskName(''); }}>
+          <IconButton color="primary" onClick={() => onAddTask(list.id)}>
             <AddIcon />
           </IconButton>
         </div>

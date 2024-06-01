@@ -1,44 +1,52 @@
-// src/components/TaskEditModal.js
-import React from 'react';
+// src/components/TaskModal.js
+import React, { useState, useEffect } from 'react';
 import { Modal, TextField, Typography, Button } from '@material-ui/core';
 import './TaskModal.css';
 
-const TaskModal = ({ task, onClose, onSave }) => {
-  const [editedTask, setEditedTask] = React.useState(task);
+const TaskModal = ({ task, open, onClose, onSave }) => {
+  const [taskData, setTaskData] = useState({ name: '', details: '', expirationDate: '' });
+
+  useEffect(() => {
+    if (task) {
+      setTaskData(task);
+    } else {
+      setTaskData({ name: '', details: '', expirationDate: '' });
+    }
+  }, [task]);
 
   const handleSave = () => {
-    onSave(editedTask);
+    onSave(taskData);
     onClose();
   };
 
   return (
-    <Modal open={!!task} onClose={onClose} className="taskModal">
+    <Modal open={open} onClose={onClose} className="taskModal">
       <div className="modalContent">
-        <Typography variant="h6">Edit Task</Typography>
+        <Typography variant="h6">{task ? 'Edit Task' : 'Add Task'}</Typography>
         <TextField
           label="Name"
-          value={editedTask.name}
+          value={taskData.name}
           fullWidth
           margin="normal"
-          onChange={(e) => setEditedTask({ ...editedTask, name: e.target.value })}
+          onChange={(e) => setTaskData({ ...taskData, name: e.target.value })}
         />
         <TextField
           label="Details"
-          value={editedTask.details}
+          value={taskData.details}
           fullWidth
           margin="normal"
           multiline
           rows={4}
-          onChange={(e) => setEditedTask({ ...editedTask, details: e.target.value })}
+          onChange={(e) => setTaskData({ ...taskData, details: e.target.value })}
         />
         <TextField
           label="Expiration Date"
           type="date"
-          value={editedTask.expirationDate}
+          value={taskData.expirationDate}
           fullWidth
           margin="normal"
           InputLabelProps={{ shrink: true }}
-          onChange={(e) => setEditedTask({ ...editedTask, expirationDate: e.target.value })}
+          onChange={(e) => setTaskData({ ...taskData, expirationDate: e.target.value })}
         />
         <div className="modalActions">
           <Button onClick={handleSave} color="primary">Save</Button>
