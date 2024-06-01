@@ -44,8 +44,5 @@
       "last 1 safari version"
     ]
   },
-  "devDependencies": {
-    "gh-pages": "^6.1.1"
-  },
   "homepage": "https://Nfnat0.github.io/board-manager-frontend"
 }
