@@ -11,7 +11,7 @@ import './App.css';
 function App() {
   return (
     <Provider store={store}>
-      <Router>
+      <Router basename="/board-manager-frontend">
         <div className="App">
           <Header />
           <div className="content">
