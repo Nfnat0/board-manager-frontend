@@ -21,13 +21,13 @@ const cardReducer = (state = initialState, action) => {
       return {
         ...state,
         cards: state.cards.map((card) =>
-          card.id === action.payload.id ? action.payload : card
+          card.cardId === action.payload.cardId ? action.payload : card
         ),
       };
     case DELETE_CARD:
       return {
         ...state,
-        cards: state.cards.filter((card) => card.id !== action.payload),
+        cards: state.cards.filter((card) => card.cardId !== action.payload),
       };
     default:
       return state;

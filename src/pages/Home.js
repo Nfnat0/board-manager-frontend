@@ -37,7 +37,7 @@ const Home = () => {
   };
 
   const handleSaveBoard = (board) => {
-    if (board.id) {
+    if (board.boardId) {
       dispatch(editBoard(board));
     } else {
       dispatch(addBoard(board));
@@ -56,11 +56,11 @@ const Home = () => {
       </Button>
       <Grid container spacing={3}>
         {boards.map((board) => (
-          <Grid item xs={12} sm={6} md={4} key={board.id}>
+          <Grid item xs={12} sm={6} md={4} key={board.boardId}>
             <BoardCard
               board={board}
               onEditClick={() => handleEditClick(board)}
-              onDelete={() => handleDelete(board.id)}
+              onDelete={() => handleDelete(board.boardId)}
             />
           </Grid>
         ))}

@@ -24,7 +24,7 @@ const addBoard = async (board) => {
 
 const editBoard = async (board) => {
   try {
-    const response = await axios.put(`${API_URL}/${board.id}`, board);
+    const response = await axios.put(`${API_URL}/${board.boardId}`, board);
     return response.data;
   } catch (error) {
     console.error("Error editing board:", error);

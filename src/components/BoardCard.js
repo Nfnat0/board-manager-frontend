@@ -10,7 +10,7 @@ const BoardCard = ({ board, onEditClick, onDelete }) => {
   const navigate = useNavigate();
 
   const handleCardClick = () => {
-    navigate(`/board/${board.id}`);
+    navigate(`/board/${board.boardId}`);
   };
 
   return (
@@ -21,7 +21,7 @@ const BoardCard = ({ board, onEditClick, onDelete }) => {
         <IconButton onClick={(e) => { e.stopPropagation(); onEditClick(board); }}>
           <EditIcon />
         </IconButton>
-        <IconButton onClick={(e) => { e.stopPropagation(); onDelete(board.id); }}>
+        <IconButton onClick={(e) => { e.stopPropagation(); onDelete(board.boardId); }}>
           <DeleteIcon />
         </IconButton>
       </CardContent>

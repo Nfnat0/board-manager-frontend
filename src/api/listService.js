@@ -14,7 +14,7 @@ const addList = async (list) => {
 };
 
 const editList = async (list) => {
-    const response = await axios.put(`${API_URL}/${list.id}`, list);
+    const response = await axios.put(`${API_URL}/${list.listId}`, list);
     return response.data;
 };
 

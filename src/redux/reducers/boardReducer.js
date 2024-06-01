@@ -21,13 +21,13 @@ const boardReducer = (state = initialState, action) => {
       return {
         ...state,
         boards: state.boards.map((board) =>
-          board.id === action.payload.id ? action.payload : board
+          board.boardId === action.payload.boardId ? action.payload : board
         ),
       };
     case DELETE_BOARD:
       return {
         ...state,
-        boards: state.boards.filter((board) => board.id !== action.payload),
+        boards: state.boards.filter((board) => board.boardId !== action.payload),
       };
     default:
       return state;

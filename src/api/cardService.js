@@ -14,7 +14,7 @@ const addCard = async (card) => {
 };
 
 const editCard = async (card) => {
-    const response = await axios.put(`${API_URL}/${card.id}`, card);
+    const response = await axios.put(`${API_URL}/${card.cardId}`, card);
     return response.data;
 };
 

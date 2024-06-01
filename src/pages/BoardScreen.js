@@ -94,7 +94,7 @@ const BoardScreen = () => {
       </div>
       <Grid container spacing={3}>
         {lists.map((list) => (
-          <Grid item xs={12} sm={6} md={4} key={list.id}>
+          <Grid item xs={12} sm={6} md={4} key={list.listId}>
             <ListCard
               list={list}
               cards={cards}

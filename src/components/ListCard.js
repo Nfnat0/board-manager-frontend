@@ -22,17 +22,17 @@ const ListCard = ({ list, cards, onEditListName, onDeleteList, onAddTask, onEdit
           margin="normal"
           fullWidth
         />
-        <IconButton color="secondary" onClick={() => onDeleteList(list.id)}>
+        <IconButton color="secondary" onClick={() => onDeleteList(list.listId)}>
           <DeleteIcon />
         </IconButton>
         <div className="addTaskContainer">
-          <IconButton color="primary" onClick={() => onAddTask(list.id)}>
+          <IconButton color="primary" onClick={() => onAddTask(list.listId)}>
             <AddIcon />
           </IconButton>
         </div>
-        {cards.filter((card) => card.listId === list.id).map((card) => (
+        {cards.filter((card) => card.listId === list.listId).map((card) => (
           <Typography
-            key={card.id}
+            key={card.cardId}
             variant="body2"
             className="card"
             onClick={() => onEditTask(card)}

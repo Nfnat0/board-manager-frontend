@@ -21,13 +21,13 @@ const listReducer = (state = initialState, action) => {
       return {
         ...state,
         lists: state.lists.map((list) =>
-          list.id === action.payload.id ? action.payload : list
+          list.listId === action.payload.listId ? action.payload : list
         ),
       };
     case DELETE_LIST:
       return {
         ...state,
-        lists: state.lists.filter((list) => list.id !== action.payload),
+        lists: state.lists.filter((list) => list.listId !== action.payload),
       };
     default:
       return state;
