@@ -1,9 +1,9 @@
 // src/components/TaskEditModal.js
 import React from 'react';
 import { Modal, TextField, Typography, Button } from '@material-ui/core';
-import './TaskEditModal.css';
+import './TaskModal.css';
 
-const TaskEditModal = ({ task, onClose, onSave }) => {
+const TaskModal = ({ task, onClose, onSave }) => {
   const [editedTask, setEditedTask] = React.useState(task);
 
   const handleSave = () => {
@@ -49,4 +49,4 @@ const TaskEditModal = ({ task, onClose, onSave }) => {
   );
 };
 
-export default TaskEditModal;
+export default TaskModal;

@@ -11,7 +11,7 @@ import {
 } from "@material-ui/core";
 import { AddCircle } from "@material-ui/icons";
 import ListCard from "../components/ListCard";
-import TaskEditModal from "../components/TaskEditModal";
+import TaskModal from "../components/TaskModal";
 import {
   fetchLists,
   deleteList,
@@ -105,7 +105,7 @@ const BoardScreen = () => {
         ))}
       </Grid>
       {selectedCard && (
-        <TaskEditModal
+        <TaskModal
           task={selectedCard}
           onClose={() => setSelectedCard(null)}
           onSave={handleSaveTask}

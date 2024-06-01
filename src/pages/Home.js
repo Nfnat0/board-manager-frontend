@@ -1,19 +1,18 @@
 // src/pages/Home.js
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Container, Grid, Button } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
 import BoardCard from '../components/BoardCard';
-import BoardEditModal from '../components/BoardEditModal';
-import BoardAddModal from '../components/BoardAddModal';
-import { fetchBoards, deleteBoard } from '../redux/actions/boardActions';
+import BoardModal from '../components/BoardModal';
+import { fetchBoards, deleteBoard, addBoard, editBoard } from '../redux/actions/boardActions';
 import './Home.css'; // Import the CSS file for custom styles
 
 const Home = () => {
   const boards = useSelector((state) => state.boards.boards);
   const dispatch = useDispatch();
-  const [selectedBoard, setSelectedBoard] = React.useState(null);
-  const [isAddModalOpen, setIsAddModalOpen] = React.useState(false);
+  const [selectedBoard, setSelectedBoard] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     dispatch(fetchBoards());
@@ -21,22 +20,28 @@ const Home = () => {
 
   const handleEditClick = (board) => {
     setSelectedBoard(board);
+    setIsModalOpen(true);
   };
 
   const handleDelete = (boardId) => {
     dispatch(deleteBoard(boardId));
   };
 
-  const handleCloseEditModal = () => {
+  const handleAddClick = () => {
     setSelectedBoard(null);
+    setIsModalOpen(true);
   };
 
-  const handleOpenAddModal = () => {
-    setIsAddModalOpen(true);
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
   };
 
-  const handleCloseAddModal = () => {
-    setIsAddModalOpen(false);
+  const handleSaveBoard = (board) => {
+    if (board.id) {
+      dispatch(editBoard(board));
+    } else {
+      dispatch(addBoard(board));
+    }
   };
 
   return (
@@ -45,9 +50,9 @@ const Home = () => {
         variant="contained"
         color="primary"
         startIcon={<AddIcon />}
-        onClick={handleOpenAddModal}
+        onClick={handleAddClick}
       >
-      Add
+        Add
       </Button>
       <Grid container spacing={3}>
         {boards.map((board) => (
@@ -60,10 +65,14 @@ const Home = () => {
           </Grid>
         ))}
       </Grid>
-      {selectedBoard && (
-        <BoardEditModal board={selectedBoard} onClose={handleCloseEditModal} />
+      {isModalOpen && (
+        <BoardModal
+          open={isModalOpen}
+          onClose={handleCloseModal}
+          onSave={handleSaveBoard}
+          board={selectedBoard}
+        />
       )}
-      {isAddModalOpen && <BoardAddModal onClose={handleCloseAddModal} />}
     </Container>
   );
 };
