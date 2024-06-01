@@ -8,11 +8,6 @@ const getCardsByBoard = async (boardId) => {
     return response.data;
 };
 
-const getCardsByList = async (listId) => {
-    const response = await axios.get(`${API_URL}?listId=${listId}`);
-    return response.data;
-};
-
 const addCard = async (card) => {
     const response = await axios.post(API_URL, card);
     return response.data;
@@ -30,7 +25,6 @@ const deleteCard = async (cardId) => {
 
 const cardService = {
     getCardsByBoard,
-    getCardsByList,
     addCard,
     editCard,
     deleteCard,
