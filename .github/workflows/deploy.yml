@@ -1,18 +1,14 @@
-name: Deploy to GitHub Pages
+name: Deploy to S3
 
 on:
   push:
     branches:
       - main
 
-permissions:
-    contents: read
-    pages: write
-    id-token: write
-
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
+    timeout-minutes: 5
 
     steps:
       - name: Checkout code
@@ -24,18 +20,22 @@ jobs:
           node-version: '20'
 
       - name: Install dependencies
-        run: npm install --legacy-peer-deps
+        run: npm install
 
-      - name: Build the app
+      - name: Build project
         env:
           REACT_APP_API_URL: ${{ secrets.REACT_APP_API_URL }}
-        run: npm run build
+        run: CI=false npm run build
 
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v1
-        with:
-            path: "build"
+      - name: Configure AWS credentials
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        run: |
+          aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID
+          aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY
+          aws configure set default.region ap-northeast-1
 
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v1
+      - name: Sync S3 bucket
+        run: |
+          aws s3 sync build/ s3://${{ secrets.AWS_S3_BUCKET }} --delete
